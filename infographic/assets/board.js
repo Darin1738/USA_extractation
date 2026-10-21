@@ -134,6 +134,32 @@
     qbtn.classList.toggle('on');
   });
 
+  // Idle X-ray: after 3-7s of no interaction, show the collage behind the
+  // panels (same effect as the X-ray button) until the pointer moves again.
+  var idleTimer = null;
+  var IDLE_MIN = 3000, IDLE_MAX = 7000;
+  function idleDelay() { return IDLE_MIN + Math.random() * (IDLE_MAX - IDLE_MIN); }
+  function clearIdleXray() { document.body.classList.remove('idle-xray'); }
+  function armIdle() {
+    if (idleTimer) clearTimeout(idleTimer);
+    idleTimer = setTimeout(function () {
+      // never fire in static/print mode, or while a panel dialog is open
+      if (document.body.classList.contains('static') ||
+          document.querySelector('dialog[open]')) { armIdle(); return; }
+      document.body.classList.add('idle-xray');
+    }, idleDelay());
+  }
+  function onActivity() { clearIdleXray(); armIdle(); }
+  ['pointermove', 'pointerdown', 'mousemove', 'wheel', 'keydown',
+   'touchstart', 'touchmove', 'focusin'].forEach(function (ev) {
+    window.addEventListener(ev, onActivity, { passive: true });
+  });
+  document.addEventListener('visibilitychange', function () {
+    if (document.hidden) { if (idleTimer) clearTimeout(idleTimer); }
+    else onActivity();
+  });
+  armIdle();
+
   // allow keyboard opening of banner/panels
   Array.prototype.forEach.call(document.querySelectorAll('[data-panel]'), function (el) {
     el.addEventListener('keydown', function (e) {

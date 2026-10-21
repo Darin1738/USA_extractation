@@ -666,3 +666,16 @@ body[data-layout="v1"] .res-item .y,body[data-layout="v1"] .mem-item .y{color:#8
 body[data-layout="v1"] .res-block h3,body[data-layout="v1"] .mem-block h3{color:#8c1420;border-bottom-color:rgba(28,24,20,.3);}
 body[data-layout="v1"] .closing span{color:#8c1420;}
 body[data-layout="v1"] .legend{background:rgba(8,7,6,.9);}
+
+/* ==========================================================================
+   IDLE X-RAY — after 3-7s of inactivity the collage reveals itself,
+   then returns to the board as soon as the pointer moves.
+   ========================================================================== */
+.panel,.banner,.zrail,.quilt,.legend{transition:opacity .55s ease;}
+body.idle-xray .panel,
+body.idle-xray .banner,
+body.idle-xray .zrail{opacity:.06;}
+body.idle-xray .legend{opacity:1;}
+body.idle-xray .quilt{opacity:1;}
+/* gentle hint that the board is "peeking" */
+body.idle-xray .stage::before{opacity:.32;}
