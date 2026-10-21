@@ -1,0 +1,31 @@
+/* VARIANT B — DUOTONE EVIDENCE
+   Archival-photo wall in ink / maroon duotone, gold + green hairlines.
+   Reads like a case file: dense, forensic, restrained colour. */
+
+body[data-variant="b"] .stage{
+  background:
+    radial-gradient(1400px 1000px at 25% 0%, #241114, transparent 62%),
+    radial-gradient(1200px 900px at 88% 100%, #101a14, transparent 60%),
+    linear-gradient(160deg,#120d0d 0%,#0a0808 55%,#050404 100%);
+}
+body[data-variant="b"] .cut.photo{filter:grayscale(1) contrast(1.28) brightness(.72) sepia(.35);}
+body[data-variant="b"] .cut.t-red{filter:grayscale(1) sepia(1) hue-rotate(-25deg) saturate(2.6) contrast(1.2) brightness(.78);}
+body[data-variant="b"] .cut.t-green{filter:grayscale(1) sepia(1) hue-rotate(75deg) saturate(1.8) contrast(1.2) brightness(.7);}
+body[data-variant="b"] .cut.t-gold{filter:grayscale(1) sepia(1) hue-rotate(-5deg) saturate(2) contrast(1.2) brightness(.86);}
+body[data-variant="b"] .cut.block{opacity:.8;}
+body[data-variant="b"] .cut.type{opacity:.42;font-size:48px;}
+body[data-variant="b"] .cut.sym{opacity:.82;}
+body[data-variant="b"] .cut.photo,.body[data-variant="b"] .cut.block{opacity:.92;}
+
+body[data-variant="b"] .panel{
+  background:linear-gradient(160deg, rgba(22,16,15,.99), rgba(9,7,6,.995));
+  border-color:rgba(230,187,58,.42);
+  box-shadow:0 16px 40px rgba(0,0,0,.66), inset 0 0 0 1px rgba(230,187,58,.10),
+             inset 0 0 40px rgba(120,20,26,.10);
+}
+body[data-variant="b"] .banner{
+  background:linear-gradient(150deg,#1c1110 0%,#0b0706 100%);
+  border-color:rgba(230,187,58,.5);
+}
+body[data-variant="b"] .p-title{text-shadow:1px 1px 0 rgba(120,20,26,.7);}
+body[data-variant="b"] .cut.type{color:var(--cream);}

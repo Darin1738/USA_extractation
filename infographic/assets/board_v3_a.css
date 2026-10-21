@@ -1,0 +1,22 @@
+/* VARIANT A — COLOUR COLLAGE
+   Saturated pan-African red/green/gold cut-outs over a black montage.
+   Photos stay recognisable but colour-shifted; blocks and symbols are loud. */
+
+body[data-variant="a"] .cut.photo{filter:grayscale(.45) contrast(1.12) brightness(.85);}
+body[data-variant="a"] .cut.t-red{filter:grayscale(.5) sepia(1) hue-rotate(-30deg) saturate(3) contrast(1.08) brightness(.9);}
+body[data-variant="a"] .cut.t-green{filter:grayscale(.5) sepia(1) hue-rotate(85deg) saturate(2.4) contrast(1.05) brightness(.84);}
+body[data-variant="a"] .cut.t-gold{filter:grayscale(.5) sepia(1) hue-rotate(-10deg) saturate(2.6) contrast(1.05) brightness(.95);}
+body[data-variant="a"] .cut.block{opacity:1;}
+body[data-variant="a"] .cut.type{opacity:.72;font-size:64px;mix-blend-mode:screen;}
+body[data-variant="a"] .cut.sym{opacity:1;}
+
+body[data-variant="a"] .panel{
+  background:linear-gradient(160deg, rgba(16,13,11,.995), rgba(8,6,5,.995));
+  border-color:rgba(230,187,58,.62);
+}
+body[data-variant="a"] .banner{
+  background:linear-gradient(150deg,#1a120f 0%,#0c0807 100%);
+  border-color:rgba(224,31,61,.7);
+}
+body[data-variant="a"] .b-title{text-shadow:3px 3px 0 rgba(18,163,94,.5);}
+body[data-variant="a"] .b-title em{color:var(--gold);}

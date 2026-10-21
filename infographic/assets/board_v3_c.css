@@ -1,0 +1,54 @@
+/* VARIANT C — BOLD GRAPHIC
+   Flat pan-African colour fields, huge type, symbols as heroes. Fewer photos:
+   agitprop-poster energy, maximum legibility on a big screen. */
+
+body[data-variant="c"] .stage{
+  background:linear-gradient(150deg,#b01029 0%,#8f0c22 26%,#0c0a09 26.2%,#0c0a09 60%,#0a6b3e 60.2%,#075c34 100%);
+}
+body[data-variant="c"] .stage::after{background:radial-gradient(120% 100% at 50% 46%, transparent 66%, rgba(0,0,0,.5) 100%);}
+body[data-variant="c"] .cut.photo{opacity:.30;filter:grayscale(1) contrast(1.3) brightness(.55);}
+body[data-variant="c"] .cut.block{display:none;}
+body[data-variant="c"] .cut.type{opacity:.5;font-size:92px;mix-blend-mode:overlay;}
+body[data-variant="c"] .cut.sym{opacity:1;}
+body[data-variant="c"] .cut.stamp{opacity:.9;}
+
+body[data-variant="c"] .panel{
+  background:var(--card);
+  border:3px solid #0b0a09;
+  color:#141110;
+  box-shadow:10px 12px 0 rgba(0,0,0,.55);
+}
+body[data-variant="c"] .panel .p-title,
+body[data-variant="c"] .panel .p-arg,
+body[data-variant="c"] .panel .p-facts,
+body[data-variant="c"] .panel .closing{color:#141110;}
+body[data-variant="c"] .panel .p-facts b{color:var(--red-deep);}
+body[data-variant="c"] .panel .p-arg{color:#3a3020;}
+body[data-variant="c"] .panel .p-facts{color:#33291c;}
+body[data-variant="c"] .panel .era{color:var(--red-deep);}
+body[data-variant="c"] .panel .pnum{color:#5a4a1c;}
+body[data-variant="c"] .panel .pnum b{color:#141110;}
+body[data-variant="c"] .panel .stat-v{color:var(--red-deep);}
+body[data-variant="c"] .panel .stat-l{color:#4a3d24;}
+body[data-variant="c"] .panel .stat-l b{color:#141110;}
+body[data-variant="c"] .panel .quote q{color:#141110;}
+body[data-variant="c"] .panel .quote cite{color:var(--red-deep);}
+body[data-variant="c"] .panel .ask{color:#141110;}
+body[data-variant="c"] .panel .src{color:#6a5c3e;}
+body[data-variant="c"] .panel .p-head{border-bottom-color:rgba(20,17,16,.4);}
+body[data-variant="c"] .panel .p-foot{border-top-color:rgba(20,17,16,.35);}
+body[data-variant="c"] .panel .p-stat{border-top-color:rgba(20,17,16,.25);}
+body[data-variant="c"] .panel figcaption{color:#5a4c30;}
+body[data-variant="c"] .res-block h3,body[data-variant="c"] .mem-block h3{color:var(--red-deep);border-bottom-color:rgba(20,17,16,.3);}
+body[data-variant="c"] .res-item .t,body[data-variant="c"] .mem-item .t{color:#141110;}
+body[data-variant="c"] .res-item .d,body[data-variant="c"] .mem-item .d{color:#4a3d24;}
+body[data-variant="c"] .res-item .y,body[data-variant="c"] .mem-item .y{color:var(--red-deep);}
+body[data-variant="c"] .panel .closing span{color:var(--red-deep);}
+
+body[data-variant="c"] .banner{
+  background:#0b0a09;
+  border-color:var(--gold);
+}
+body[data-variant="c"] .b-title{font-size:74px;color:var(--cream);text-shadow:3px 3px 0 var(--red);}
+body[data-variant="c"] .b-title em{color:var(--gold);}
+body[data-variant="c"] .symkey{background:rgba(11,10,9,.92);}
