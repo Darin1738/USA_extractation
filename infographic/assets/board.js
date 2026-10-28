@@ -34,14 +34,25 @@
       return '<li>' + esc(x) + '</li>';
     }).join('') + '</ul>';
   }
+  /* In the bundled single-file build, window.EMB maps an image filename to the
+     css class that carries its embedded data URI. Fall back to a normal <img>. */
+  function mediaEl(im) {
+    var emb = window.EMB || {};
+    var name = im.f || im.file || '';
+    if (name && emb[name]) {
+      return '<div class="emb-img ' + emb[name] + '" role="img" title="' +
+             esc(im.cap || im.caption || '') + '"></div>';
+    }
+    var src = im.src || ('../media/' + encodeURIComponent(name));
+    return '<img src="' + src + '" alt="' + esc(im.cap || im.caption || '') + '">';
+  }
 
   function openPanel(id) {
     var p = B.panels[id];
     if (!p) return;
     var media = (p.images || []).map(function (im) {
-      var src = im.src || ('../media/' + encodeURIComponent(im.f));
       var cap = im.cap || im.caption || '';
-      return '<figure><img src="' + src + '" alt="' + esc(cap) + '">' +
+      return '<figure>' + mediaEl(im) +
              '<figcaption>' + esc(cap) + '</figcaption></figure>';
     }).join('');
     dlgHead.innerHTML =
@@ -74,7 +85,7 @@
       '<div class="m-media">' +
         (src ? '<div class="m-sym-icon">' + src.outerHTML + '</div>' : '') +
         (s.images || []).map(function (im) {
-          return '<figure><img src="' + im.src + '" alt="' + esc(im.caption) + '">' +
+          return '<figure>' + mediaEl(im) +
                  '<figcaption>' + esc(im.caption) + '</figcaption></figure>';
         }).join('') +
       '</div>' +
@@ -90,6 +101,7 @@
   function show() {
     if (typeof dlg.showModal === 'function') { try { dlg.showModal(); } catch (e) { dlg.setAttribute('open', ''); } }
     else dlg.setAttribute('open', '');
+    if (window.fillEmb) window.fillEmb(dlg);
   }
   function close() {
     if (typeof dlg.close === 'function') { try { dlg.close(); } catch (e) {} }

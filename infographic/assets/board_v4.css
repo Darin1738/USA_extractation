@@ -679,3 +679,15 @@ body.idle-xray .legend{opacity:1;}
 body.idle-xray .quilt{opacity:1;}
 /* gentle hint that the board is "peeking" */
 body.idle-xray .stage::before{opacity:.32;}
+
+/* ==========================================================================
+   COMBINED BOARD (single portable file) — one .layout-set per layout,
+   only the active one (body[data-layout]) is shown.
+   ========================================================================== */
+.layout-set{display:none;}
+body[data-layout="v1"] .layout-set[data-set="v1"],
+body[data-layout="quilt"] .layout-set[data-set="quilt"],
+body[data-layout="zine"] .layout-set[data-set="zine"],
+body[data-layout="broadside"] .layout-set[data-set="broadside"]{display:block;}
+.layout-set > *{position:absolute;}
+.layout-set{position:absolute;inset:0;}

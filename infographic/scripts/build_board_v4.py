@@ -534,6 +534,30 @@ def page_name(layout: str) -> str:
     return f"board_{layout}.html"
 
 
+def board_sections(layout: str) -> str:
+    """The positioned children of the stage for one layout (no wrapper)."""
+    panel_ids = ("p2", "p3", "p4", "p5", "p6", "p7", "p8", "p9")
+    for pid in panel_ids + ("p10",):
+        P[pid]["id"] = pid
+    seed = {"broadside": 4410, "quilt": 7721, "zine": 9913, "v1": 5504}[layout]
+    return (quilt_html(seed, layout) + banner_html(layout) +
+            "".join(panel_html(P[k], layout) for k in panel_ids) +
+            p10_html(layout) + rail_html(layout) +
+            legend_html(layout) + footer_html(layout))
+
+
+def board_json(layout: str) -> dict:
+    return {
+        "variant": "a",
+        "layout": layout,
+        "panels": {pid: {k: v for k, v in P[pid].items() if k in
+                         ("num", "tag", "era", "title", "arg", "facts", "stat", "stats",
+                          "quote", "images", "question", "source", "notes", "questions",
+                          "sources", "note")} for pid in P},
+        "symbols": SYMBOLS,
+    }
+
+
 def build_html(layout: str) -> str:
     panel_ids = ("p2", "p3", "p4", "p5", "p6", "p7", "p8", "p9")
     for pid in panel_ids + ("p10",):
@@ -591,6 +615,67 @@ def build_html(layout: str) -> str:
 
 <script>window.BOARD = {json.dumps(board_json, ensure_ascii=False)};</script>
 <script src="assets/board.js"></script>
+</body>
+</html>
+"""
+    return doc
+
+
+def build_combined_html(default_layout: str = "quilt") -> str:
+    """One document containing all four layouts; switch in-page, no reloads."""
+    order = ["v1", "quilt", "zine", "broadside"]
+    sets = "".join(
+        f'<div class="layout-set" data-set="{lay}">{board_sections(lay)}</div>'
+        for lay in order
+    )
+    boards = {lay: board_json(lay) for lay in order}
+    switch = "".join(
+        f'<button class="lay-btn" type="button" data-goto="{lay}">{lay.upper()}</button>'
+        for lay in order
+    )
+    doc = f"""<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Group 4 · The Name Changes / The Function Does Not</title>
+<link rel="stylesheet" href="assets/fonts/fonts.css">
+<link rel="stylesheet" href="assets/fonts/caslon.css">
+<link rel="stylesheet" href="assets/board.css">
+<link rel="stylesheet" href="assets/board_v4.css">
+</head>
+<body data-variant="a" data-layout="{default_layout}">
+<div class="holder"><div class="stage" id="stage">
+  {sets}
+</div></div>
+
+<dialog id="modal" aria-label="Panel detail">
+  <div id="modal-head" class="m-head"></div>
+  <div id="modal-body" class="m-body"></div>
+</dialog>
+
+<div class="toolbar" role="toolbar" aria-label="Board controls">
+  <div class="brand"><b>GROUP 4</b> · THE NAME CHANGES</div>
+  <div class="lay-switch" role="group" aria-label="Switch layout">{switch}</div>
+  <button id="xray" type="button">X-RAY THE COLLAGE</button>
+  <button id="qtoggle" type="button">HIDE QUESTIONS</button>
+</div>
+
+<script>window.BOARDS = {json.dumps(boards, ensure_ascii=False)};
+window.BOARD = window.BOARDS[{json.dumps(default_layout)}];</script>
+<script src="assets/board.js"></script>
+<script>
+(function(){{
+  var btns = document.querySelectorAll('.lay-btn[data-goto]');
+  function apply(lay){{
+    document.body.setAttribute('data-layout', lay);
+    window.BOARD = window.BOARDS[lay];
+    btns.forEach(function(b){{ b.classList.toggle('on', b.getAttribute('data-goto') === lay); }});
+  }}
+  btns.forEach(function(b){{ b.addEventListener('click', function(){{ apply(b.getAttribute('data-goto')); }}); }});
+  apply({json.dumps(default_layout)});
+}})();
+</script>
 </body>
 </html>
 """
