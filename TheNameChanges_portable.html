@@ -2480,7 +2480,7 @@ window.EMB={"imagery.jpg": "emb0", "slave_atlantic_trade_slave_ship.jpg": "emb1"
       return '<div class="emb-img ' + emb[name] + '" role="img" title="' +
              esc(im.cap || im.caption || '') + '"></div>';
     }
-    var src = im.src || ('../media/' + encodeURIComponent(name));
+    var src = im.src || ('media/' + encodeURIComponent(name));
     return '<img src="' + src + '" alt="' + esc(im.cap || im.caption || '') + '">';
   }
 

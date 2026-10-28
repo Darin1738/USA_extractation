@@ -4,9 +4,8 @@ Interactive history infographic for HIST 350, Group 4, Morgan State University.
 
 ## GitHub Pages
 
-The GitHub Pages entry point is the quilt board. The repository-root `index.html`
-redirects to this folder, and `infographic/index.html` is the quilt board itself.
-The same page is also available as `board_quilt.html`.
+The repository-root `index.html` is the quilt board and the default GitHub Pages
+page. The same page is also available as `board_quilt.html`.
 
 ## Project contents
 
@@ -17,5 +16,6 @@ The same page is also available as `board_quilt.html`.
 - `board_v1.html`, `board_zine.html`, and `board_broadside.html` — alternate layouts.
 - `BIBLIOGRAPHY.md`, `MEDIA_MANIFEST.md`, `IMAGE_SOURCES.md`, and `VERIFY.md` — research and source notes.
 
-Open `index.html` in a browser to view the primary board. The site is static and
-uses local assets; no build step is required to view it.
+Open `index.html` in a browser to view the primary board. Set GitHub Pages to
+deploy from the repository root ( `/` ) on the `main` branch. The site is static
+and uses local assets; no build step is required to view it.
